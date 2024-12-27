@@ -20,5 +20,7 @@ jobs:
       run: cmake -B ${{github.workspace}}/build
     - name: domake
       run: cmake --build ${{github.workspace}}/build
+    - name: Run debug log
+      uses: ./.github/actions/test
     - name: testrun
       run: ${{github.workspace}}/build/hello_cmake
