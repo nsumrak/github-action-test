@@ -1,24 +1,14 @@
-# .github/actions/execute-action/action.yml
+# .github/actions/test/action.yml
 
 name: "Test Workflow"
 description: "Test workflow."
 
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
+runs:
+  using: "composite"
+  steps:
 
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: cmake -B ${{github.workspace}}/build
-    - name: domake
-      run: cmake --build ${{github.workspace}}/build
-    - name: testrun
-      run: ${{github.workspace}}/build/hello_cmake
+    - name: log
+      shell: bash
+      run: |
+        set -o xtrace
+        echo "Action test"
