@@ -1,7 +1,6 @@
-# .github/actions/execute-action/action.yml
+# .github/workflows/main.yml
 
-name: "Test Workflow"
-description: "Test workflow."
+name: "Typical Workflow"
 
 on:
   push:
@@ -15,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     - name: configure
       run: cmake -B ${{github.workspace}}/build
     - name: domake
