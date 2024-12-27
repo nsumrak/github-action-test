@@ -18,9 +18,11 @@ jobs:
       uses: actions/checkout@v4
     - name: configure
       run: cmake -B ${{github.workspace}}/build
-    - name: domake
+    - name: Build
       run: cmake --build ${{github.workspace}}/build
     - name: Run debug log
       uses: ./.github/actions/test
-    - name: testrun
+    - name: Run tests
+      run: ${{github.workspace}}/build/unit_test
+    - name: Application test run
       run: ${{github.workspace}}/build/hello_cmake
