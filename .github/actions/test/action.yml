@@ -17,9 +17,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: configure
-      run: |
-        mkdir build
-        cd build
-        cmake ..
+      run: cmake -B ${{github.workspace}}/build
     - name: domake
-      run: make
+      run: cmake --build ${{github.workspace}}/build
+    - name: testrun
+      run: ${{github.workspace}}/build/hello_cmake
