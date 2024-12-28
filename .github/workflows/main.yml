@@ -3,8 +3,6 @@
 name: "Typical Workflow"
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -26,3 +24,11 @@ jobs:
       run: ${{github.workspace}}/build/hello_cmake
     - name: Run app
       run: ${{github.workspace}}/build/unit_tests
+    - name: Add success comment to PR
+      run: |
+        if [ ${{ job.status }} == 'success' ]; then
+          gh pr comment ${{ github.event.number }} --body "Job success"
+        else
+          gh pr comment ${{ github.event.number }} --body "Job fail!"
+        fi
+
