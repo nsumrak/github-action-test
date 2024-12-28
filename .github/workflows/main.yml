@@ -25,6 +25,10 @@ jobs:
     - name: Run app
       run: ${{github.workspace}}/build/unit_tests
     - name: Add success comment to PR
-      if: ${{ job.status }} == 'success'
-      with:
-        run: gh pr comment ${{ github.event.number }} --body "Job success"
+      run: |
+        if [ ${{ job.status }} == 'success' ]; then
+          gh pr comment ${{ github.event.number }} --body "Job success"
+        else
+          gh pr comment ${{ github.event.number }} --body "Job fail!"
+        fi
+
